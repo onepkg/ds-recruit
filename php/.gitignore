@@ -1,4 +1,11 @@
-composer.lock
+# 依赖与构建产物
+vendor/
 composer.phar
-vendor
-.phpunit.*
+
+# PHPUnit 运行缓存（phpunit.xml 里 cacheDirectory 指向 .phpunit.cache）
+.phpunit.cache/
+.phpunit.result.cache
+
+# 改进点：composer.lock 不再忽略。
+# 锁定文件能保证本地、容器、CI 装到完全一致的依赖版本，
+# 对可复现构建来说是应该纳入版本控制的文件。

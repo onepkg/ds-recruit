@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-        displayDetailsOnTestsThatTriggerDeprecations="true"
-        displayDetailsOnTestsThatTriggerErrors="true"
-        displayDetailsOnTestsThatTriggerNotices="true"
-        displayDetailsOnTestsThatTriggerWarnings="true"
->
+<!--
+  改进点：原配置只有 display* 选项，没有 bootstrap 和 testsuite。
+  - bootstrap：显式加载 Composer 自动加载器，保证 Src\ 与 Tests\ 命名空间可用；
+  - testsuite：把 tests 目录登记为默认测试套件，`phpunit` 可零参数运行（也便于 CI 复用）；
+  - cacheDirectory：把 PHPUnit 运行缓存写进被 .gitignore 忽略的目录，避免污染工作区。
+-->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         cacheDirectory=".phpunit.cache"
+         colors="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true">
+    <testsuites>
+        <testsuite name="MyGreeter">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>
