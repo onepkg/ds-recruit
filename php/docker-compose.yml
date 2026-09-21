@@ -8,7 +8,11 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - .:/srv:cached
-    tty: true
+
+    # 改进点：用显式的 sleep 命令常驻容器，替代原来仅靠 `tty: true` + 基础镜像默认的 `php -a`
+    # 隐式保活的做法，行为更明确，也不再需要为常驻容器分配 TTY。
+    command: ["sleep", "infinity"]
+
     deploy:
       resources:
         limits:

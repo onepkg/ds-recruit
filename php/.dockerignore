@@ -1,0 +1,10 @@
+# 构建上下文排除项：缩小上下文体积，并避免把宿主机上的依赖混进镜像。
+# vendor 目录由镜像内的 composer install 生成，宿主机上的 vendor 可能与本镜像的
+# PHP 版本/平台不一致，必须排除，否则会覆盖构建结果。
+vendor
+composer.phar
+.phpunit.cache
+.phpunit.result.cache
+.phpunit.cache/
+.git
+.gitignore
